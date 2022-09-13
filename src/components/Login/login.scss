@@ -1,0 +1,41 @@
+.login__section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+
+    .login__form {
+        background-color: bisque;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px;
+        border-color: dimgray;
+        border-radius: 16px;
+        padding: 18px;
+        width: 300px;
+
+
+        .login__input {
+            width: 80%;
+            margin: 8px;
+            padding: 10px;
+            border-radius: 8px;
+            border-color: aqua;
+
+        }
+    }
+}
+
+
+
+.title {
+    text-align: center;
+    font-size: 38px;
+    color: blueviolet;
+
+}

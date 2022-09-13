@@ -1,6 +1,8 @@
 import { useState } from "react"
 import { Navigate } from "react-router-dom";
-import { useLogin } from "../Context/Authentication"
+import { useLogin } from "../../Context/Authentication"
+import Button from '@mui/material/Button';
+import "./login.scss";
 
 const Login = () => {
 
@@ -24,27 +26,25 @@ const Login = () => {
                 password: password.value.trim()
             }),
         },)
+        .then(res => res.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err))
         
 
-        const data =await response.json(); 
 
-        console.log(data);
-
-        if(data.staus == 200) {
-            setToken(data.token)
-            Navigate("/teacher")
-        }
 
     }
 
-    return<>
-        <h1>Login</h1>
-        <form action="" onSubmit={handleSubmit}>
-            <input name="username" type="text" placeholder="username" />
-            <input name="password" type="text" placeholder="password" />
-            <button type="submit">Send</button>
+    return(
+        <div className="login__section">
+        <h1 className="title">Login</h1>
+        <form className="login__form" action="" onSubmit={handleSubmit}>
+            <input className="login__input" name='username' type="text" placeholder="username" />
+            <input className="login__input" name='password' type="text" placeholder="password" />
+            <Button variant="contained" type="submit">Log in</Button>
         </form>
-    </>
+        </div>
+    )
 }
 
 export default Login;
