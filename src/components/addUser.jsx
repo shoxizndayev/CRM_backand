@@ -1,4 +1,10 @@
+import React from "react";
+import "./addusers.scss"
+import Button from '@mui/material/Button';
+
+
 const AddUser = () => {
+
 
 
    function handleClick(evt) {
@@ -35,6 +41,10 @@ const AddUser = () => {
    }
    return (
       <>
+
+      <h4>
+         Add User
+      </h4>
          <div className="add-post-container">
             <form action="" onSubmit={handleClick}>
                <input type="text" className="form-control" placeholder='name' name='name'/>
@@ -44,8 +54,8 @@ const AddUser = () => {
                <input type="number" className="form-control" placeholder='phone_number' name='phone_number'/>
                <input type="text" className="form-control" placeholder='course' name='course'/>
                <input type="text" className="form-control" placeholder='role' name='role' defaultValue={'student'}/>
-               <textarea className="form-control" cols="10" rows="8"></textarea>
-               <button type="submit">Add Post</button>
+               <Button variant="contained" type="submit">Add user</Button>
+               
             </form>
          </div>
       </>

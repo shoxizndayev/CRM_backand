@@ -1,8 +1,45 @@
-const Student = () => {
+import React, { useEffect, useState } from "react"
+import "./student.scss"
+import {Link} from 'react-router-dom'
+
+const GetStudents = () => {
+
+    const [student, setStudent] = useState([])
+
+    const fetchData = async () => {
+        fetch("http://localhost:8080/students")
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            setStudent(data)
+        })
+
+    }
+
+
+    useEffect(() => {
+        fetchData()
+    }, [])
 
     return<>
-        <h1>Student</h1>
+        <div>
+            {student.length > 0 && 
+                student.map(student => {
+                    return (
+                    <div className="students">
+                        <ul key={student.id}>
+                        <li>{student.name}</li>
+                        <li>{student.surname}</li>
+                        <li>{student.phone_number}</li>
+                        <li>{student.course}</li>
+                    </ul>
+                    </div>
+                    )})
+            }
+
+        </div>
     </>
 }
 
-export default Student;
+export default GetStudents;

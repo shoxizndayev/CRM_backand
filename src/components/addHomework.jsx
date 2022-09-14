@@ -1,22 +1,36 @@
+import React from "react";
+import Button from '@mui/material/Button';
+import "./addhomewors.scss"
+
+
 const AddHomework = () => {
+
+    
     function addClick(evt) {
-        let { title, grou_id } = evt.target.elements;
+        evt.preventDefault()
+
+        let { title, groups } = evt.target.elements;
+
 
         title = title.value.trim()
-        grou_id = title.value.trim()
+        let group_id = groups.value.trim()
 
 
-        fetch('http://localhost:8080/groups/' + {grou_id} + '/homeworks', {
+
+        fetch('http://localhost:8080/groups/' + group_id + '/homeworks', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
              },
              mode: 'cors',
              body: JSON.stringify({
-                title,
-                grou_id
+                title
              })
 
+        }).then(data=> data.json()).then(data=>{
+            if(data.status==201) {
+                evt.target.reset()
+            }
         })
 
     }
@@ -25,6 +39,7 @@ const AddHomework = () => {
 
     React.useEffect(() => {
         fetch('http://localhost:8080/groups').then(data => data.json()).then(data=> {
+            console.log(data);
             setPosts(data)
         } )
     }, [])
@@ -37,15 +52,16 @@ const AddHomework = () => {
 
     return (
         <>
-        <div>
-            <form action="" onSubmit={addClick}>
+        <div className="homeworks">
+            <form action="" onSubmit={addClick} className="homeworks__form">
                 <input type="text" placeholder="homework" name="title" />
-                <select name="" id="">{
-                    posts && posts.map(post => <option key={post.id} value={post.id}>{post.title}</option>)
+                <select className="homeworks__select" name="groups" id="">{
+                    posts && posts.map(post => <option className="homeworks__option" key={post.id} value={post.id}>{post.group_name}</option>)
                 }
                 </select>
 
-                <button type="submit">nonv</button>
+                <Button variant="contained" type="submit">Submit</Button>
+                
             </form>
         </div>
         </>

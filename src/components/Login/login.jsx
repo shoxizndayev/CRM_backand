@@ -1,10 +1,12 @@
 import { useState } from "react"
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useLogin } from "../../Context/Authentication"
 import Button from '@mui/material/Button';
 import "./login.scss";
 
 const Login = () => {
+
+    const navigate = useNavigate()
 
     const [ token, setToken] = useLogin()
     const [username, setUsername] = useState("");
@@ -22,13 +24,23 @@ const Login = () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                name: username.value.trim(),
+                username: username.value.trim(),
                 password: password.value.trim()
             }),
         },)
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => {
+            if(data.role=='admin') {
+                navigate('/admin')
+            } if(data.role=='teacher') {
+                navigate('/teacher')
+            } if (data.role=='student') {
+                navigate('/student')
+            }
+        })
         .catch(err => console.log(err))
+
+        
         
 
 

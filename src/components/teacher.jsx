@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
+import "./teacher.scss"
+
 
 const Teacher = () => {
 
@@ -15,21 +18,27 @@ const Teacher = () => {
 
     }
 
+    useEffect(() => {
+        fetchData()
+    }, "")
+
     return<>
-        <div>
+        <div className="teacher__section">
 
             <h1>
                 Teacher
             </h1>
-            <button onClick={fetchData}>Fetch Users</button>
             {users.length > 0 && 
                 users.map(users => {
                     return (
-                    <ul>
-                        <li key={users.id}>{users.name}</li>
+                    <ul key={users.id}>
+                        <li>{users.name}</li>
                         <li>{users.surname}</li>
-                        <li>{users.phone_number}</li>
+                        <li>{'++9989 ' + users.phone_number}</li>
                         <li>{users.course}</li>
+                        <li>
+                            <Link className="link" to={"/teacher/groups"}>Groups</Link>
+                        </li>
 
                     </ul>
                     )})
